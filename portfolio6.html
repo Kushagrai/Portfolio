@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Kushagra Namdev | Premium Frontends </title>
+    <meta name="description"
+        content="Kushagra Namdev - Creative Frontend Developer based in Jaipur. Specializing in React, WebGL, Three.js & Interactive Web Experiences.">
+    <meta name="keywords" content="Frontend Developer, React, WebGL, Three.js, Web Developer, Portfolio, Jaipur">
+    <meta name="author" content="Kushagra Namdev">
+    <meta name="robots" content="index, follow">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="spiderman-deadpool/5.png" />
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Kushagra Namdev | Creative Frontend Developer">
+    <meta property="og:description"
+        content="Crafting Digital Reality - Creative Frontend Developer specializing in React, WebGL & Interaction Design">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Performance: Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.simpleicons.org">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+
+    <!-- Fonts with display=swap for faster text rendering -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@200,400,500,600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    screens: {
+                        'xs': '375px',
+                        'sm-phone': '390px',  // iPhone 12/13/14
+                        'md-phone': '430px',  // iPhone Pro Max
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Critical CSS (inline for performance) -->
+    <style>
+        /* Critical rendering path styles */
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --accent-color: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            transition: background-color 0.8s ease-out, color 0.8s ease-out;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        html {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+        }
+
+        /* Custom cursor - hide on touch devices */
+        @media (hover: hover) and (pointer: fine) {
+            body {
+                cursor: none;
+            }
+        }
+
+        h1,
+        h2,
+        h3,
+        .display-font {
+            font-family: 'Clash Display', sans-serif;
+        }
+
+        /* Smooth Scroll */
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        /* Custom Cursor - only for non-touch devices */
+        .cursor,
+        .cursor-follower {
+            display: none;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .cursor {
+                display: block;
+                width: 20px;
+                height: 20px;
+                border: 1px solid var(--text-color);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                transition: transform 0.1s, border-color 0.8s ease-out;
+                mix-blend-mode: difference;
+                will-change: transform;
+            }
+
+            .cursor-follower {
+                display: block;
+                width: 8px;
+                height: 8px;
+                background: var(--text-color);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                transition: transform 0.15s, background-color 0.8s ease-out;
+                mix-blend-mode: difference;
+                will-change: transform;
+            }
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: 'Clash Display', sans-serif;
+            font-size: clamp(1rem, 4vw, 2rem);
+        }
+
+        /* 3D Styles with GPU acceleration */
+        .perspective-container {
+            perspective: 1000px;
+        }
+
+        .card-3d {
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        /* Optimized Marquee Animation */
+        @keyframes marquee {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .animate-marquee {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: marquee 30s linear infinite;
+            will-change: transform;
+        }
+
+        .marquee-text img {
+            display: inline-block;
+            transition: filter 0.3s ease, transform 0.3s ease;
+            background: transparent !important;
+            object-fit: contain;
+        }
+
+        .marquee-text img:hover {
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+            transform: scale(1.15);
+        }
+
+        /* Grid background pattern */
+        .grid-bg {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+        }
+
+        .nav-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            color: #000000 !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        /* Mobile Navigation Toggle */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 8px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: currentColor;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .mobile-menu-btn.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .mobile-menu-btn.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu-btn.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.98);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            z-index: 40;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-menu a {
+            font-size: 2rem;
+            font-family: 'Clash Display', sans-serif;
+            font-weight: 500;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Responsive Typography */
+        .hero-title {
+            font-size: clamp(2.5rem, 9vw, 9rem);
+            line-height: 0.95;
+            text-align: left;
+            display: block;
+            width: 100%;
+            /* Responsive padding */
+            padding-left: clamp(1rem, 8vw, 80px);
+        }
+
+        .hero-title div {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .hero-content {
+            text-align: center !important;
+        }
+
+        .hero-content p {
+            text-align: center !important;
+        }
+
+
+
+        .section-title {
+            font-size: clamp(2rem, 8vw, 6rem);
+            line-height: 1.1;
+        }
+
+        .contact-title {
+            font-size: clamp(2rem, 10vw, 8rem);
+            line-height: 1;
+        }
+
+        /* Responsive Spacing */
+        @media (max-width: 768px) {
+            .hero-content {
+                padding-top: 6rem;
+                padding-bottom: 2rem;
+            }
+
+            .project-card-info {
+                padding: 1.5rem !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+
+            body {
+                font-size: 16px;
+                /* Prevent zoom on input focus */
+            }
+
+            /* Better mobile padding */
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+        }
+
+        /* Mobile Device Specific Optimizations */
+        /* Small phones (iPhone SE, Galaxy A series, Motorola, Xiaomi) */
+        @media (max-width: 375px) {
+            .hero-title {
+                font-size: clamp(2rem, 11vw, 3rem) !important;
+                line-height: 1 !important;
+                padding-left: 0.5rem !important;
+            }
+
+            .hero-content {
+                padding-top: 5rem !important;
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+            }
+
+            .contact-title {
+                font-size: clamp(1.75rem, 11vw, 3.5rem) !important;
+            }
+
+            .section-title {
+                font-size: clamp(1.75rem, 9vw, 3rem) !important;
+            }
+
+            .hero-title div {
+                padding: 0 !important;
+            }
+        }
+
+        /* Medium phones (iPhone 12/13/14, Galaxy S/M series, Motorola Edge, Xiaomi) */
+        @media (min-width: 376px) and (max-width: 430px) {
+            .hero-title {
+                font-size: clamp(2.25rem, 10vw, 4rem) !important;
+                padding-left: 1rem !important;
+            }
+
+            .section-title {
+                font-size: clamp(1.875rem, 8vw, 3.5rem) !important;
+            }
+
+            .contact-title {
+                font-size: clamp(2rem, 10vw, 4.5rem) !important;
+            }
+
+            .hero-content {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+        }
+
+        /* Large phones (iPhone Pro Max, Galaxy S series Plus, Motorola, Xiaomi Pro) */
+        @media (min-width: 431px) and (max-width: 768px) {
+            .hero-title {
+                font-size: clamp(2.5rem, 9vw, 5rem) !important;
+                padding-left: 1.5rem !important;
+            }
+
+            .section-title {
+                font-size: clamp(2rem, 7vw, 4rem) !important;
+            }
+
+            .contact-title {
+                font-size: clamp(2.25rem, 9vw, 5rem) !important;
+            }
+
+            .hero-content {
+                padding-left: 1.5rem !important;
+                padding-right: 1.5rem !important;
+            }
+        }
+
+        /* Landscape orientation - better mobile landscape support */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .hero-content {
+                padding-top: 3rem !important;
+                padding-bottom: 1rem !important;
+            }
+
+            .hero-title {
+                font-size: clamp(1.5rem, 7vw, 2.5rem) !important;
+                line-height: 1.1 !important;
+                padding-left: 1rem !important;
+            }
+
+            .min-h-screen {
+                min-height: auto !important;
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+
+            .hero-characters {
+                height: 50vh !important;
+            }
+        }
+
+        /* Tablet optimization */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-title {
+                font-size: clamp(4rem, 8vw, 7rem);
+            }
+
+            .section-title {
+                font-size: clamp(3rem, 6vw, 5rem);
+            }
+
+            .contact-title {
+                font-size: clamp(3.5rem, 7vw, 6rem);
+            }
+        }
+
+        /* Lazy load images placeholder */
+        img[loading="lazy"] {
+            background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+            background-size: 200% 100%;
+        }
+
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .animate-marquee {
+                animation: none;
+            }
+        }
+
+        /* Touch-friendly buttons and links */
+        @media (max-width: 768px) {
+
+            a,
+            button {
+                min-height: 44px;
+                min-width: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Mobile navigation improvements */
+            nav a,
+            nav button {
+                padding: 0.75rem 1rem;
+            }
+
+            /* Prevent text size adjustment on orientation change */
+            html {
+                -webkit-text-size-adjust: 100%;
+                text-size-adjust: 100%;
+            }
+        }
+
+        /* Gemini Snake Light Effect - Premium Worm Style */
+        .gemini-border-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9998;
+            overflow: hidden;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Hide on very small screens to improve performance */
+        @media (max-width: 375px) {
+            .gemini-border-wrapper {
+                display: none;
+            }
+        }
+
+        .gemini-border-wrapper span {
+            position: absolute;
+            display: block;
+            border-radius: 4px;
+        }
+
+        /* Top Side */
+        .gemini-border-wrapper span:nth-child(1) {
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            /* Thicker head */
+            background: linear-gradient(90deg, transparent, #d96570, #9b72cb, #4285f4, #fff);
+            filter: drop-shadow(0 0 10px rgba(66, 133, 244, 0.8));
+            /* Taper: Left (tail) is thin, Right (head) is thick */
+            clip-path: polygon(0 40%, 100% 0, 100% 100%, 0 60%);
+            animation: moveTopWorm 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        /* Right Side */
+        .gemini-border-wrapper span:nth-child(2) {
+            top: 0;
+            right: 0;
+            width: 4px;
+            /* Thicker head */
+            height: 0;
+            background: linear-gradient(180deg, transparent, #d96570, #9b72cb, #4285f4, #fff);
+            filter: drop-shadow(0 0 10px rgba(155, 114, 203, 0.8));
+            /* Taper: Top (tail) is thin, Bottom (head) is thick */
+            clip-path: polygon(40% 0, 60% 0, 100% 100%, 0 100%);
+            animation: moveRightWorm 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            animation-delay: 3s;
+        }
+
+        /* Bottom Side */
+        .gemini-border-wrapper span:nth-child(3) {
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 4px;
+            /* Thicker head */
+            background: linear-gradient(270deg, transparent, #d96570, #9b72cb, #4285f4, #fff);
+            filter: drop-shadow(0 0 10px rgba(217, 101, 112, 0.8));
+            /* Taper: Right (tail) is thin, Left (head) is thick */
+            clip-path: polygon(0 0, 100% 40%, 100% 60%, 0 100%);
+            animation: moveBottomWorm 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            animation-delay: 6s;
+        }
+
+        /* Left Side */
+        .gemini-border-wrapper span:nth-child(4) {
+            bottom: 0;
+            left: 0;
+            width: 4px;
+            /* Thicker head */
+            height: 0;
+            background: linear-gradient(360deg, transparent, #d96570, #9b72cb, #4285f4, #fff);
+            filter: drop-shadow(0 0 10px rgba(66, 133, 244, 0.8));
+            /* Taper: Bottom (tail) is thin, Top (head) is thick */
+            clip-path: polygon(0 0, 100% 0, 60% 100%, 40% 100%);
+            animation: moveLeftWorm 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            animation-delay: 9s;
+        }
+
+        /* Keyframes: Grow (Head moves 0-15%) -> Shrink Fast (Tail catches up 15-20%) */
+        @keyframes moveTopWorm {
+            0% {
+                left: 0;
+                width: 0;
+            }
+
+            15% {
+                left: 0;
+                width: 100%;
+            }
+
+            /* Head extends */
+            20% {
+                left: 100%;
+                width: 0;
+            }
+
+            /* Tail snaps fast */
+            100% {
+                left: 100%;
+                width: 0;
+            }
+        }
+
+        @keyframes moveRightWorm {
+            0% {
+                top: 0;
+                height: 0;
+            }
+
+            15% {
+                top: 0;
+                height: 100%;
+            }
+
+            20% {
+                top: 100%;
+                height: 0;
+            }
+
+            100% {
+                top: 100%;
+                height: 0;
+            }
+        }
+
+        @keyframes moveBottomWorm {
+            0% {
+                right: 0;
+                width: 0;
+            }
+
+            15% {
+                right: 0;
+                width: 100%;
+            }
+
+            20% {
+                right: 100%;
+                width: 0;
+            }
+
+            100% {
+                right: 100%;
+                width: 0;
+            }
+        }
+
+        @keyframes moveLeftWorm {
+            0% {
+                bottom: 0;
+                height: 0;
+            }
+
+            15% {
+                bottom: 0;
+                height: 100%;
+            }
+
+            20% {
+                bottom: 100%;
+                height: 0;
+            }
+
+            100% {
+                bottom: 100%;
+                height: 0;
+            }
+        }
+
+
+
+        /* Project card responsive */
+        .project-image-container {
+            height: clamp(200px, 50vw, 60vh);
+        }
+
+        @media (max-width: 768px) {
+            .project-image-container {
+                height: clamp(180px, 60vw, 400px) !important;
+                max-height: 300px;
+            }
+        }
+
+        /* Hero Text Rotator */
+        .rotating-text-wrapper {
+            height: 1.1em;
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: bottom;
+            position: relative;
+            width: 100%;
+        }
+
+        .rotating-text-inner {
+            display: flex;
+            flex-direction: column;
+            animation: rotateWords 12s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+        }
+
+        .rotating-text-inner div {
+            flex-shrink: 0;
+            height: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Enforce Center Alignment */
+        }
+
+        /* 
+           Synced Loop Logic:
+           - Beam Tail Snaps: 15% - 20%
+           - Text Slides: 15% - 20% (Syncs with tail)
+           - Hold Time: 20% (e.g., 20% - 40%)
+           
+           0% - 15%: Hold REALITY (while Top beam grows)
+           15% - 20%: Slide to EXPERIENCES (while Top beam collects)
+           20% - 40%: Hold EXPERIENCES (Gap + Right beam grows)
+           40% - 45%: Slide to INTERFACES (while Right beam collects)
+           45% - 65%: Hold INTERFACES
+           65% - 70%: Slide to MOTION
+           70% - 90%: Hold MOTION
+           90% - 95%: Slide to REALITY (Dub)
+           95% - 100%: Hold REALITY (Dub) -> Snap to 0% (Hold Reality Orig)
+        */
+        @keyframes rotateWords {
+
+            0%,
+            15% {
+                transform: translateY(0);
+            }
+
+            20%,
+            40% {
+                transform: translateY(-20%);
+            }
+
+            45%,
+            65% {
+                transform: translateY(-40%);
+            }
+
+            70%,
+            90% {
+                transform: translateY(-60%);
+            }
+
+            95%,
+            100% {
+                transform: translateY(-80%);
+            }
+        }
+
+        /* Character Animation Styles */
+        .hero-characters {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 90vh;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .character {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: clamp(480px, 55vw, 750px);
+            /* Increased from 370px/45vw/580px */
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+        }
+
+        /* Spiderman specific size and position */
+        .character-spiderman {
+            width: clamp(510px, 56vw, 820px);
+            /* Increased from 390px/43vw/630px */
+            transform: translateX(calc(-50% - 38vw)) translateY(60px);
+            /* Moved more left: -38vw */
+            /* Added translateY to shift down */
+            /* Fixed at left */
+        }
+
+        /* Deadpool specific position */
+        .character-deadpool {
+            transform: translateX(calc(-50% + 38vw)) translateY(60px);
+            /* Moved more right: +38vw */
+            /* Added translateY to shift down */
+            /* Fixed at right */
+        }
+
+        /* Spiderman emerges from center and slides to the left */
+        @keyframes emergeAndSlideLeft {
+            0% {
+                transform: translateX(-50%) translateY(100%);
+                opacity: 0;
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(calc(-50% - 40vw)) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Deadpool emerges from center and slides to the right */
+        @keyframes emergeAndSlideRight {
+            0% {
+                transform: translateX(-50%) translateY(100%);
+                opacity: 0;
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(calc(-50% + 40vw)) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Mobile adjustments - Optimized for all mobile brands */
+        @media (max-width: 768px) {
+            .hero-characters {
+                height: 50vh !important;
+            }
+
+            .character {
+                width: clamp(180px, 45vw, 380px) !important;
+                max-width: 90vw;
+            }
+
+            /* Spiderman adjusted for mobile */
+            .character-spiderman {
+                width: clamp(200px, 50vw, 420px) !important;
+                max-width: 90vw;
+                transform: translateX(calc(-50% - 30vw)) translateY(40px) !important;
+            }
+
+            .character-deadpool {
+                transform: translateX(calc(-50% + 30vw)) translateY(40px) !important;
+            }
+
+            @keyframes emergeAndSlideLeft {
+                0% {
+                    transform: translateX(-50%) translateY(100%);
+                    opacity: 0;
+                }
+
+                40% {
+                    transform: translateX(-50%) translateY(0);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateX(calc(-50% - 30vw)) translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes emergeAndSlideRight {
+                0% {
+                    transform: translateX(-50%) translateY(100%);
+                    opacity: 0;
+                }
+
+                40% {
+                    transform: translateX(-50%) translateY(0);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateX(calc(-50% + 30vw)) translateY(0);
+                    opacity: 1;
+                }
+            }
+        }
+
+        /* Extra small mobile devices */
+        @media (max-width: 375px) {
+            .hero-characters {
+                height: 40vh !important;
+            }
+
+            .character {
+                width: clamp(140px, 40vw, 280px) !important;
+            }
+
+            .character-spiderman {
+                width: clamp(160px, 45vw, 320px) !important;
+                transform: translateX(calc(-50% - 25vw)) translateY(30px) !important;
+            }
+
+            .character-deadpool {
+                transform: translateX(calc(-50% + 25vw)) translateY(30px) !important;
+            }
+        }
+
+        /* Light Rays Container */
+        #light-rays-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        #light-rays-container canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Loader -->
+    <div class="loader" aria-hidden="true">
+        <div class="loader-text overflow-hidden">
+            <span class="inline-block translate-y-[100%]">LOADING EXPERIENCES...</span>
+        </div>
+    </div>
+
+    <!-- Gemini Border Effect -->
+    <div class="gemini-border-wrapper" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Custom Cursor (auto-hidden on touch devices via CSS) -->
+    <div class="cursor" aria-hidden="true"></div>
+    <div class="cursor-follower" aria-hidden="true"></div>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#work" class="mobile-nav-link">Work</a>
+        <a href="#about" class="mobile-nav-link">About</a>
+        <a href="#contact" class="mobile-nav-link">Contact</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar"
+        class="fixed top-0 left-0 w-full px-4 sm:px-6 md:px-8 py-4 md:py-6 flex justify-between items-center z-50 text-white transition-all duration-500"
+        role="navigation" aria-label="Main navigation">
+        <div class="text-sm sm:text-base md:text-lg font-bold tracking-widest uppercase">Kushagra Namdev</div>
+
+        <!-- Desktop Navigation -->
+        <div class="space-x-4 md:space-x-8 text-sm hidden md:block">
+            <a href="#work" class="hover-link hover:opacity-50 transition-opacity">Work</a>
+            <a href="#about" class="hover-link hover:opacity-50 transition-opacity">About</a>
+            <a href="#contact" class="hover-link hover:opacity-50 transition-opacity">Contact</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="text-xs sm:text-sm hidden sm:block">Available for Hire</div>
+    </nav>
+
+    <!-- SECTION 1: HERO -->
+    <section id="hero-section"
+        class="min-h-screen relative flex items-center justify-center section-theme perspective-container overflow-hidden"
+        data-bg="#0a0a0a" data-text="#ffffff" aria-labelledby="hero-heading" style="perspective: 1500px;">
+
+        <!-- Parallax Layer 1 - Background -->
+        <div class="absolute inset-0 grid-bg opacity-20 pointer-events-none parallax-layer" data-depth="0.1"></div>
+
+        <!-- Light Rays WebGL Effect -->
+        <div id="light-rays-container" class="parallax-layer" data-depth="0.05"></div>
+
+        <!-- Parallax Layer 2 - Content -->
+        <div class="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10 text-center hero-content pt-20 md:pt-32 w-full parallax-layer"
+            data-depth="0.3">
+            <p
+                class="text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] md:tracking-[0.3em] opacity-0 hero-anim mb-6 sm:mb-8 md:mb-12 translate-x-0 sm:translate-x-2 md:translate-x-14">
+                Scroll. Watch. Feel.
+            </p>
+            <h1 id="hero-heading"
+                class="hero-title font-semibold tracking-tight mix-blend-difference hero-anim overflow-hidden w-full">
+                <div class="hero-line translate-y-[110%]">CRAFTING</div>
+                <div class="hero-line translate-y-[110%]">DIGITAL</div>
+                <div class="hero-line translate-y-[110%]">
+                    <div class="rotating-text-wrapper">
+                        <div class="rotating-text-inner">
+                            <div>REALITY</div>
+                            <div>EXPERIENCES</div>
+                            <div>INTERFACES</div>
+                            <div>MOTION</div>
+                            <div>REALITY</div>
+                        </div>
+                    </div>
+                </div>
+            </h1>
+
+            <div class="mt-6 sm:mt-8 md:mt-12 flex justify-center items-center opacity-0 hero-anim">
+                <div class="animate-bounce">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        class="sm:w-6 sm:h-6" aria-label="Scroll down">
+                        <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Parallax Layer 3 - Characters (Foreground) -->
+        <div class="hero-characters parallax-layer" aria-hidden="true" data-depth="0.5">
+            <img src="spiderman-deadpool/Firefly_Gemini-Flash(1).png" alt="Spiderman"
+                class="character character-spiderman" loading="eager" />
+            <img src="spiderman-deadpool/deadpool-4k-pc-desktop-hd-wallpaper-preview.png" alt="Deadpool"
+                class="character character-deadpool" loading="eager" />
+        </div>
+
+        <!-- Abstract Parallax Element -->
+        <div class="absolute right-[10%] top-[20%] w-[30vw] h-[30vw] bg-neutral-800 rounded-full blur-[100px] opacity-30 parallax-layer"
+            data-depth="0.15" aria-hidden="true"></div>
+    </section>
+
+
+    <!-- Transitional Footer -->
+    <div
+        class="w-full text-center py-8 sm:py-12 md:py-24 bg-black text-neutral-400 text-xs sm:text-sm md:text-xl relative z-20 px-4">
+        &copy; Based in Jaipur<br class="sm:hidden"><span class="hidden sm:inline"> </span>Specializing in React, WebGL
+        & Interaction
+    </div>
+
+    <!-- SECTION 2: SELECTED WORK -->
+    <section id="work" class="min-h-screen py-12 sm:py-16 md:py-32 section-theme relative" data-bg="#e6e6e6"
+        data-text="#1a1a1a" aria-labelledby="work-heading">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 md:mb-24 gap-4 sm:gap-6">
+                <h2 id="work-heading" class="section-title font-medium tracking-tight">Selected<br>Works</h2>
+                <p class="max-w-md text-sm sm:text-base md:text-lg opacity-70">A curation of interface designs,
+                    websites, and
+                    interactive
+                    experiments built with modern technologies.</p>
+            </div>
+
+            <!-- Project 1 -->
+            <article class="project-card perspective-container mb-12 sm:mb-16 md:mb-32 group cursor-pointer w-full">
+                <div class="flex flex-col md:flex-row items-center gap-4 sm:gap-6 md:gap-12">
+                    <div
+                        class="w-full md:w-2/3 project-image-container relative card-3d bg-gray-300 overflow-hidden shadow-2xl transition-transform duration-700 ease-out group-hover:scale-[1.02] rounded-lg md:rounded-none">
+                        <div
+                            class="absolute inset-0 bg-neutral-800 flex items-center justify-center text-white overflow-hidden">
+                            <div class="absolute left-0 w-full h-[150%] -top-[18%] bg-cover bg-top"
+                                style="background-image: url('https://assets.vogue.com/photos/66f426815d79427b6456f2a4/master/w_2560,c_limit/Holding%20(6).jpg');"
+                                role="img" aria-label="Lumina Fashion project preview"></div>
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors">
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="w-full md:w-1/3 space-y-3 sm:space-y-4 md:space-y-6 md:-ml-24 z-10 p-4 sm:p-6 md:p-8 bg-white/90 md:bg-white/80 backdrop-blur-md transition-all duration-500 project-card-info rounded-lg md:rounded-none">
+                        <span
+                            class="text-xs font-bold border border-current px-3 py-1 rounded-full uppercase inline-block">E-Commerce</span>
+                        <h3 class="text-xl sm:text-2xl md:text-4xl font-medium">Lumina Fashion</h3>
+                        <p class="opacity-70 text-sm md:text-base">A headless Shopify experience with WebGL clothing
+                            simulation and seamless page transitions.</p>
+                        <ul class="text-xs md:text-sm opacity-60 flex flex-wrap gap-2 md:gap-4">
+                            <li>Next.js</li>
+                            <li>Three.js</li>
+                            <li>Shopify API</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="project-card perspective-container mb-12 sm:mb-16 md:mb-32 group cursor-pointer w-full">
+                <div class="flex flex-col md:flex-row-reverse items-center gap-4 sm:gap-6 md:gap-12">
+                    <div
+                        class="w-full md:w-2/3 project-image-container relative card-3d bg-gray-300 overflow-hidden shadow-2xl transition-transform duration-700 ease-out group-hover:scale-[1.02] rounded-lg md:rounded-none">
+                        <div
+                            class="absolute inset-0 bg-neutral-800 flex items-center justify-center text-white overflow-hidden">
+                            <div class="absolute left-0 w-full h-[150%] -top-[18%] bg-cover bg-top"
+                                style="background-image: url('https://www.inetsoft.com/images/screenshots/stock_market_trading_dashboard.jpg');"
+                                role="img" aria-label="Apex Dashboard project preview"></div>
+                            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors">
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="w-full md:w-1/3 space-y-3 sm:space-y-4 md:space-y-6 md:-mr-24 z-10 p-4 sm:p-6 md:p-8 bg-white/90 md:bg-white/80 backdrop-blur-md md:text-right md:items-end flex flex-col transition-all duration-500 project-card-info rounded-lg md:rounded-none">
+                        <span
+                            class="text-xs font-bold border border-current px-3 py-1 rounded-full uppercase inline-block">FinTech</span>
+                        <h3 class="text-xl sm:text-2xl md:text-4xl font-medium">Apex Dashboard</h3>
+                        <p class="opacity-70 text-sm md:text-base">Real-time data visualization platform for
+                            high-frequency traders with sub-millisecond updates.</p>
+                        <ul class="text-xs md:text-sm opacity-60 flex flex-wrap gap-2 md:gap-4 md:justify-end">
+                            <li>React</li>
+                            <li>D3.js</li>
+                            <li>WebSockets</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- SECTION 3: SKILLS -->
+    <section id="about"
+        class="min-h-screen py-16 md:py-24 flex items-center justify-center section-theme relative overflow-hidden"
+        data-bg="#0f172a" data-text="#94a3b8" aria-labelledby="skills-heading">
+        <!-- Floating Background Elements -->
+        <div class="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
+            <div class="absolute top-1/4 left-1/4 w-32 md:w-64 h-32 md:h-64 border border-blue-500/20 rounded-full blur-3xl skill-orb"
+                data-speed="0.5"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-48 md:w-96 h-48 md:h-96 border border-purple-500/20 rounded-full blur-3xl skill-orb"
+                data-speed="0.3"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="container mx-auto px-4 sm:px-6 relative z-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+                <div>
+                    <h2 id="skills-heading"
+                        class="text-4xl sm:text-5xl md:text-7xl text-white mb-6 md:mb-8 font-medium leading-tight">
+                        The<br>Stack</h2>
+                    <p class="text-base md:text-xl leading-relaxed max-w-md text-gray-300">
+                        I don't just build websites; I build digital environments. My toolkit is selected for
+                        performance, scalability, and visual impact.
+                    </p>
+                </div>
+
+                <div class="space-y-8 md:space-y-10">
+                    <!-- Skill Bars -->
+                    <div class="skill-item group">
+                        <div class="flex justify-between text-white mb-2 md:mb-3 text-base md:text-lg font-medium">
+                            <span>Frontend Architecture</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="h-[2px] w-full bg-slate-700/50 relative overflow-hidden rounded-full">
+                            <div class="absolute top-0 left-0 h-full bg-blue-500 w-0 transition-all duration-1000 ease-out skill-bar-fill shadow-[0_0_10px_rgba(59,130,246,0.5)]"
+                                style="--target-width: 95%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group">
+                        <div class="flex justify-between text-white mb-2 md:mb-3 text-base md:text-lg font-medium">
+                            <span>Creative Interaction</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="h-[2px] w-full bg-slate-700/50 relative overflow-hidden rounded-full">
+                            <div class="absolute top-0 left-0 h-full bg-purple-500 w-0 transition-all duration-1000 ease-out skill-bar-fill shadow-[0_0_10px_rgba(168,85,247,0.5)]"
+                                style="--target-width: 88%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-item group">
+                        <div class="flex justify-between text-white mb-2 md:mb-3 text-base md:text-lg font-medium">
+                            <span>UI/UX Design</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="h-[2px] w-full bg-slate-700/50 relative overflow-hidden rounded-full">
+                            <div class="absolute top-0 left-0 h-full bg-pink-500 w-0 transition-all duration-1000 ease-out skill-bar-fill shadow-[0_0_10px_rgba(236,72,153,0.5)]"
+                                style="--target-width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marquee -->
+        <div class="absolute bottom-6 md:bottom-10 left-0 w-full overflow-hidden py-4 opacity-40 hover:opacity-100 transition-opacity duration-300 z-10 marquee-container"
+            aria-label="Technology stack">
+            <div class="animate-marquee marquee-text">
+                <!-- Set 1 -->
+                <img src="https://cdn.simpleicons.org/react/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="React" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/nextdotjs/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="Next.js" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/typescript/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="TypeScript" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/tailwindcss/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="Tailwind" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/threedotjs/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="Three.js" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/opengl/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="WebGL" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/blender/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="Blender" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/figma/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="Figma" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/github/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="GitHub" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/nodedotjs/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="Node.js" loading="lazy" width="80"
+                    height="80">
+                <!-- Set 2 (duplicate for seamless loop) -->
+                <img src="https://cdn.simpleicons.org/react/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="React" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/nextdotjs/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="Next.js" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/typescript/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="TypeScript" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/tailwindcss/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="Tailwind" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/threedotjs/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="Three.js" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/opengl/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="WebGL" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/blender/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="Blender" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/figma/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="Figma" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/github/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="GitHub" loading="lazy" width="80"
+                    height="80">
+                <img src="https://cdn.simpleicons.org/nodedotjs/white"
+                    class="h-12 md:h-20 w-auto inline-block mx-6 md:mx-12" alt="Node.js" loading="lazy" width="80"
+                    height="80">
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: CONTACT -->
+    <section id="contact" class="min-h-screen flex items-center justify-center section-theme text-center px-4"
+        data-bg="#ff4d4d" data-text="#ffffff" aria-labelledby="contact-heading">
+        <div class="container mx-auto px-4 sm:px-6">
+            <p class="text-base md:text-xl mb-6 md:mb-8 font-medium uppercase tracking-widest">What's Next?</p>
+            <h2 id="contact-heading"
+                class="contact-title leading-none font-bold mb-8 md:mb-12 hover:scale-105 transition-transform duration-500 cursor-pointer perspective-container">
+                <a href="mailto:hello@example.com"
+                    class="inline-block hover:rotate-2 transition-transform duration-300">LET'S TALK</a>
+            </h2>
+
+            <div
+                class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-8 md:gap-24 text-base md:text-lg font-medium">
+                <a href="https://www.linkedin.com/in/kushagrai/" target="_blank"
+                    class="hover:opacity-70 transition-opacity py-2">LinkedIn</a>
+
+                <a href="https://github.com/kushagrai" target="_blank"
+                    class="hover:opacity-70 transition-opacity py-2">GitHub</a>
+                <a href="https://www.instagram.com/kuxshagra" target="_blank"
+                    class="hover:opacity-70 transition-opacity py-2">Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts: Load non-critical JS deferred -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js" defer></script>
+
+    <script>
+        // Wait for DOM and scripts to load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function () {
+                    mobileMenuBtn.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    mobileMenuBtn.setAttribute('aria-expanded',
+                        mobileMenuBtn.classList.contains('active').toString());
+                });
+
+                mobileNavLinks.forEach(link => {
+                    link.addEventListener('click', function () {
+                        mobileMenuBtn.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+        });
+
+        // Initialize animations after scripts load
+        window.addEventListener('load', function () {
+            // Check if GSAP loaded
+            if (typeof gsap === 'undefined' || typeof Lenis === 'undefined') {
+                console.warn('Animation libraries not loaded');
+                // Remove loader immediately if libraries fail
+                const loader = document.querySelector('.loader');
+                if (loader) loader.style.display = 'none';
+                return;
+            }
+
+            // 1. Initialize Lenis (Smooth Scroll)
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+                mouseMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // Sync GSAP ScrollTrigger with Lenis
+            gsap.registerPlugin(ScrollTrigger);
+
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0);
+
+            // 2. Navbar Scroll Effect
+            // 2. Navbar Scroll Effect & Gemini Border Fade
+            ScrollTrigger.create({
+                start: 'top -50',
+                end: 99999,
+                toggleClass: { className: 'nav-scrolled', targets: '#navbar' }
+            });
+
+            // Fade out Gemini border when leaving hero section
+            gsap.to('.gemini-border-wrapper', {
+                opacity: 0,
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: '500px top', // Fade out over first 500px of scroll
+                    scrub: true
+                }
+            });
+
+            // 3. Custom Cursor Logic (only for non-touch devices)
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+            if (!isTouchDevice) {
+                const cursor = document.querySelector('.cursor');
+                const follower = document.querySelector('.cursor-follower');
+                const links = document.querySelectorAll('a, .hover-link, .project-card');
+
+                if (cursor && follower) {
+                    gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+                    gsap.set(follower, { xPercent: -50, yPercent: -50 });
+
+                    document.addEventListener('mousemove', (e) => {
+                        gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 });
+                        gsap.to(follower, { x: e.clientX, y: e.clientY, duration: 0.3 });
+                    });
+
+                    links.forEach(link => {
+                        link.addEventListener('mouseenter', () => {
+                            gsap.to(cursor, { scale: 3, opacity: 0.55 });
+                            gsap.to(follower, { scale: 0 });
+                        });
+                        link.addEventListener('mouseleave', () => {
+                            gsap.to(cursor, { scale: 1, opacity: 1 });
+                            gsap.to(follower, { scale: 1 });
+                        });
+                    });
+                }
+            }
+
+            // 4. Loader Animation
+            const tl = gsap.timeline();
+
+            tl.to('.loader-text span', {
+                y: 0,
+                duration: 1,
+                ease: 'power4.out',
+                delay: 0.2
+            })
+                .to('.loader-text span', {
+                    y: '-100%',
+                    duration: 0.8,
+                    ease: 'power4.in',
+                    delay: 0.5
+                })
+                .to('.loader', {
+                    height: 0,
+                    duration: 1,
+                    ease: 'expo.inOut'
+                })
+                .to('.hero-line', {
+                    y: '0%',
+                    duration: 1.5,
+                    stagger: 0.1,
+                    ease: 'power4.out'
+                }, "-=0.5")
+                .to('.hero-anim', {
+                    y: 0,
+                    opacity: 1,
+                    stagger: 0.2,
+                    duration: 1.5,
+                    ease: 'power3.out'
+                }, "-=1.0");
+            // Characters are now static - no animations needed
+
+            // 5. Dynamic Color/Theme Switching
+            const sections = document.querySelectorAll('.section-theme');
+
+            sections.forEach(section => {
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: "top center",
+                    end: "bottom center",
+                    onEnter: () => updateTheme(section),
+                    onEnterBack: () => updateTheme(section),
+                });
+            });
+
+            function updateTheme(section) {
+                const bgColor = section.dataset.bg;
+                const textColor = section.dataset.text;
+
+                document.documentElement.style.setProperty('--bg-color', bgColor);
+                document.documentElement.style.setProperty('--text-color', textColor);
+
+                // Navbar Visibility Logic
+                const navbar = document.getElementById('navbar');
+                if (section.id === 'work' || section.id === 'about') {
+                    navbar.classList.add('opacity-0', '-translate-y-full', 'pointer-events-none');
+                } else {
+                    navbar.classList.remove('opacity-0', '-translate-y-full', 'pointer-events-none');
+                }
+            }
+
+            // 6. Parallax & 3D Effects
+            gsap.to('.parallax-bg', {
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1
+                },
+                y: 300,
+                rotation: 45
+            });
+
+            // Project Cards - 3D Tilt (desktop only)
+            if (!isTouchDevice) {
+                document.querySelectorAll('.project-card').forEach((card) => {
+                    const inner = card.querySelector('.card-3d');
+                    gsap.set(card, { perspective: 1000 });
+                    gsap.set(inner, { transformStyle: "preserve-3d" });
+
+                    card.addEventListener('mousemove', (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        const xPct = (x / rect.width - 0.5) * 2;
+                        const yPct = (y / rect.height - 0.5) * 2;
+
+                        const rotateX = -yPct * 5;
+                        const rotateY = xPct * 5;
+
+                        gsap.to(inner, {
+                            rotationX: rotateX,
+                            rotationY: rotateY,
+                            scale: 1.02,
+                            duration: 0.4,
+                            ease: 'power2.out'
+                        });
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        gsap.to(inner, {
+                            rotationX: 0,
+                            rotationY: 0,
+                            scale: 1,
+                            duration: 0.7,
+                            ease: 'elastic.out(1, 0.6)'
+                        });
+                    });
+                });
+            }
+
+            // Window Parallax for all devices
+            document.querySelectorAll('.project-card').forEach((card) => {
+                const img = card.querySelector('.bg-cover');
+                if (img) {
+                    gsap.fromTo(img,
+                        { yPercent: -15, scale: 1 },
+                        {
+                            yPercent: 15,
+                            scale: 1,
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: card,
+                                start: "top bottom",
+                                end: "bottom top",
+                                scrub: true
+                            }
+                        }
+                    );
+                }
+            });
+
+            // Skill Bar Animation
+            gsap.utils.toArray('.skill-item').forEach(item => {
+                const bar = item.querySelector('.skill-bar-fill');
+                const targetWidth = getComputedStyle(bar).getPropertyValue('--target-width') || '100%';
+
+                ScrollTrigger.create({
+                    trigger: item,
+                    start: "top 80%",
+                    onEnter: () => {
+                        gsap.to(bar, { width: targetWidth, duration: 1.5, ease: "power2.out" });
+                    }
+                });
+            });
+
+            // Skill Orbs Parallax
+            gsap.utils.toArray('.skill-orb').forEach((orb) => {
+                const speed = orb.dataset.speed;
+                gsap.to(orb, {
+                    y: -100 * speed,
+                    scrollTrigger: {
+                        trigger: '#about',
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 1
+                    }
+                });
+            });
+
+            // Contact Text Animation
+            const contactText = document.querySelector('#contact h2');
+            gsap.from(contactText, {
+                scale: 0.5,
+                opacity: 0,
+                rotationX: 45,
+                scrollTrigger: {
+                    trigger: '#contact',
+                    start: "top 70%",
+                    end: "center center",
+                    scrub: 1
+                }
+            });
+        });
+    </script>
+
+    <!-- Light Rays WebGL Effect -->
+    <script>
+        /**
+         * Vanilla JS + WebGL implementation of the LightRays effect
+         * Adapted from ReactBits LightRays component
+         */
+        class LightRaysEffect {
+            constructor(container, config = {}) {
+                this.container = container;
+                this.canvas = document.createElement('canvas');
+                this.gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
+
+                if (!this.gl) {
+                    console.error('[LightRays] WebGL not supported');
+                    return;
+                }
+
+                // Default configuration
+                this.config = {
+                    raysOrigin: 'bottom-center',
+                    raysColor: '#ffffff',
+                    raysSpeed: 0.8,
+                    lightSpread: 1.2,
+                    rayLength: 2.0,
+                    pulsating: true,
+                    fadeDistance: 1.0,
+                    saturation: 1.0,
+                    followMouse: false,
+                    mouseInfluence: 0.0,
+                    noiseAmount: 0.0,
+                    distortion: 0.0,
+                    ...config
+                };
+
+                this.mouse = { x: 0.5, y: 0.5 };
+                this.smoothMouse = { x: 0.5, y: 0.5 };
+                this.program = null;
+                this.uniformLocations = {};
+                this.animationId = null;
+                this.startTime = Date.now();
+
+                this.init();
+                this.bindEvents();
+                console.log('[LightRays] ✅ Initialized successfully');
+            }
+
+            hexToRgb(hex) {
+                const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return m ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255] : [1, 1, 1];
+            }
+
+            getAnchorAndDir(origin, w, h) {
+                const outside = 0.2;
+                switch (origin) {
+                    case 'top-left': return { anchor: [0, -outside * h], dir: [0, 1] };
+                    case 'top-right': return { anchor: [w, -outside * h], dir: [0, 1] };
+                    case 'left': return { anchor: [-outside * w, 0.5 * h], dir: [1, 0] };
+                    case 'right': return { anchor: [(1 + outside) * w, 0.5 * h], dir: [-1, 0] };
+                    case 'bottom-left': return { anchor: [0, (1 + outside) * h], dir: [0, -1] };
+                    case 'bottom-center': return { anchor: [0.5 * w, (1 + outside) * h], dir: [0, -1] };
+                    case 'bottom-right': return { anchor: [w, (1 + outside) * h], dir: [0, -1] };
+                    default: // "top-center"
+                        return { anchor: [0.5 * w, -outside * h], dir: [0, 1] };
+                }
+            }
+
+            createShader(type, source) {
+                const shader = this.gl.createShader(type);
+                this.gl.shaderSource(shader, source);
+                this.gl.compileShader(shader);
+                if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
+                    console.error('[LightRays] Shader compile error:', this.gl.getShaderInfoLog(shader));
+                    this.gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+
+            init() {
+                this.container.appendChild(this.canvas);
+                this.resize();
+
+                // Vertex Shader
+                const vsSource = `
+            attribute vec2 position;
+            varying vec2 vUv;
+            void main() {
+                vUv = position * 0.5 + 0.5;
+                gl_Position = vec4(position, 0.0, 1.0);
+            }
+        `;
+
+                // Fragment Shader
+                const fsSource = `
+            precision highp float;
+
+            uniform float iTime;
+            uniform vec2 iResolution;
+            uniform vec2 rayPos;
+            uniform vec2 rayDir;
+            uniform vec3 raysColor;
+            uniform float raysSpeed;
+            uniform float lightSpread;
+            uniform float rayLength;
+            uniform float pulsating;
+            uniform float fadeDistance;
+            uniform float saturation;
+            uniform vec2 mousePos;
+            uniform float mouseInfluence;
+            uniform float noiseAmount;
+            uniform float distortion;
+
+            varying vec2 vUv;
+
+            float noise(vec2 st) {
+                return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+            }
+
+            float rayStrength(vec2 raySource, vec2 rayRefDirection, vec2 coord, float seedA, float seedB, float speed) {
+                vec2 sourceToCoord = coord - raySource;
+                vec2 dirNorm = normalize(sourceToCoord);
+                float cosAngle = dot(dirNorm, rayRefDirection);
+
+                float distortedAngle = cosAngle + distortion * sin(iTime * 2.0 + length(sourceToCoord) * 0.01) * 0.2;
+                float spreadFactor = pow(max(distortedAngle, 0.0), 1.0 / max(lightSpread, 0.001));
+
+                float distance = length(sourceToCoord);
+                float maxDistance = iResolution.x * rayLength;
+                float lengthFalloff = clamp((maxDistance - distance) / maxDistance, 0.0, 1.0);
+
+                float fadeFalloff = clamp((iResolution.x * fadeDistance - distance) / (iResolution.x * fadeDistance), 0.5, 1.0);
+                float pulse = pulsating > 0.5 ? (0.8 + 0.2 * sin(iTime * speed * 3.0)) : 1.0;
+
+                float baseStrength = clamp(
+                    (0.45 + 0.15 * sin(distortedAngle * seedA + iTime * speed)) +
+                    (0.3 + 0.2 * cos(-distortedAngle * seedB + iTime * speed)),
+                    0.0, 1.0
+                );
+
+                return baseStrength * lengthFalloff * fadeFalloff * spreadFactor * pulse;
+            }
+
+            void main() {
+                vec2 coord = vec2(gl_FragCoord.x, gl_FragCoord.y);
+                
+                vec2 finalRayDir = rayDir;
+                if (mouseInfluence > 0.0) {
+                    vec2 mouseScreenPos = mousePos * iResolution.xy;
+                    vec2 mouseDirection = normalize(mouseScreenPos - rayPos);
+                    finalRayDir = normalize(mix(rayDir, mouseDirection, mouseInfluence));
+                }
+
+                vec4 rays1 = vec4(1.0) * rayStrength(rayPos, finalRayDir, coord, 36.2214, 21.11349, 1.5 * raysSpeed);
+                vec4 rays2 = vec4(1.0) * rayStrength(rayPos, finalRayDir, coord, 22.3991, 18.0234, 1.1 * raysSpeed);
+
+                vec4 fragColor = rays1 * 0.5 + rays2 * 0.4;
+
+                if (noiseAmount > 0.0) {
+                    float n = noise(coord * 0.01 + iTime * 0.1);
+                    fragColor.rgb *= (1.0 - noiseAmount + noiseAmount * n);
+                }
+
+                float brightness = 1.0 - (coord.y / iResolution.y);
+                fragColor.x *= 0.1 + brightness * 0.8;
+                fragColor.y *= 0.3 + brightness * 0.6;
+                fragColor.z *= 0.5 + brightness * 0.5;
+
+                if (saturation != 1.0) {
+                    float gray = dot(fragColor.rgb, vec3(0.299, 0.587, 0.114));
+                    fragColor.rgb = mix(vec3(gray), fragColor.rgb, saturation);
+                }
+
+                fragColor.rgb *= raysColor;
+                gl_FragColor = fragColor;
+            }
+        `;
+
+                const vertexShader = this.createShader(this.gl.VERTEX_SHADER, vsSource);
+                const fragmentShader = this.createShader(this.gl.FRAGMENT_SHADER, fsSource);
+
+                if (!vertexShader || !fragmentShader) {
+                    console.error('[LightRays] Failed to create shaders');
+                    return;
+                }
+
+                this.program = this.gl.createProgram();
+                this.gl.attachShader(this.program, vertexShader);
+                this.gl.attachShader(this.program, fragmentShader);
+                this.gl.linkProgram(this.program);
+
+                if (!this.gl.getProgramParameter(this.program, this.gl.LINK_STATUS)) {
+                    console.error('[LightRays] Program link error:', this.gl.getProgramInfoLog(this.program));
+                    return;
+                }
+
+                // Create a full-screen triangle
+                const buffer = this.gl.createBuffer();
+                this.gl.bindBuffer(this.gl.ARRAY_BUFFER, buffer);
+                this.gl.bufferData(
+                    this.gl.ARRAY_BUFFER,
+                    new Float32Array([-1, -1, -1, 3, 3, -1]),
+                    this.gl.STATIC_DRAW
+                );
+
+                // Attribute setup
+                const positionLocation = this.gl.getAttribLocation(this.program, 'position');
+                this.gl.enableVertexAttribArray(positionLocation);
+                this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 0, 0);
+
+                // Cache uniform locations
+                const uniformNames = [
+                    'iTime', 'iResolution', 'rayPos', 'rayDir', 'raysColor',
+                    'raysSpeed', 'lightSpread', 'rayLength', 'pulsating',
+                    'fadeDistance', 'saturation', 'mousePos', 'mouseInfluence',
+                    'noiseAmount', 'distortion'
+                ];
+
+                uniformNames.forEach(name => {
+                    this.uniformLocations[name] = this.gl.getUniformLocation(this.program, name);
+                });
+
+                // Start loop
+                this.render();
+            }
+
+            resize() {
+                if (!this.container) return;
+                const width = this.container.clientWidth;
+                const height = this.container.clientHeight;
+                const dpr = Math.min(window.devicePixelRatio, 2);
+
+                this.canvas.width = width * dpr;
+                this.canvas.height = height * dpr;
+                this.canvas.style.width = width + 'px';
+                this.canvas.style.height = height + 'px';
+
+                if (this.gl) {
+                    this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+                }
+            }
+
+            bindEvents() {
+                window.addEventListener('resize', () => this.resize());
+
+                if (this.config.followMouse) {
+                    window.addEventListener('mousemove', (e) => {
+                        const rect = this.canvas.getBoundingClientRect();
+                        const x = (e.clientX - rect.left) / rect.width;
+                        const y = 1.0 - (e.clientY - rect.top) / rect.height;
+                        this.mouse = { x, y };
+                    });
+                }
+            }
+
+            render() {
+                if (!this.program) return;
+
+                const time = (Date.now() - this.startTime) * 0.001;
+                this.gl.useProgram(this.program);
+
+                // Smooth mouse
+                const smoothing = 0.92;
+                this.smoothMouse.x = this.smoothMouse.x * smoothing + this.mouse.x * (1 - smoothing);
+                this.smoothMouse.y = this.smoothMouse.y * smoothing + this.mouse.y * (1 - smoothing);
+
+                // Geometry
+                const width = this.canvas.width;
+                const height = this.canvas.height;
+                const { anchor, dir } = this.getAnchorAndDir(this.config.raysOrigin, width, height);
+
+                // Update Uniforms
+                const loc = this.uniformLocations;
+                this.gl.uniform1f(loc.iTime, time);
+                this.gl.uniform2f(loc.iResolution, width, height);
+                this.gl.uniform2fv(loc.rayPos, anchor);
+                this.gl.uniform2fv(loc.rayDir, dir);
+                this.gl.uniform3fv(loc.raysColor, this.hexToRgb(this.config.raysColor));
+                this.gl.uniform1f(loc.raysSpeed, this.config.raysSpeed);
+                this.gl.uniform1f(loc.lightSpread, this.config.lightSpread);
+                this.gl.uniform1f(loc.rayLength, this.config.rayLength);
+                this.gl.uniform1f(loc.pulsating, this.config.pulsating ? 1.0 : 0.0);
+                this.gl.uniform1f(loc.fadeDistance, this.config.fadeDistance);
+                this.gl.uniform1f(loc.saturation, this.config.saturation);
+                this.gl.uniform2f(loc.mousePos, this.smoothMouse.x, this.smoothMouse.y);
+                this.gl.uniform1f(loc.mouseInfluence, this.config.mouseInfluence);
+                this.gl.uniform1f(loc.noiseAmount, this.config.noiseAmount);
+                this.gl.uniform1f(loc.distortion, this.config.distortion);
+
+                this.gl.drawArrays(this.gl.TRIANGLES, 0, 3);
+                this.animationId = requestAnimationFrame(() => this.render());
+            }
+
+            destroy() {
+                if (this.animationId) {
+                    cancelAnimationFrame(this.animationId);
+                }
+            }
+        }
+
+        // Initialize Light Rays Effect
+        (function () {
+            const container = document.getElementById('light-rays-container');
+            if (container) {
+                // Wait a bit for layout to settle
+                setTimeout(() => {
+                    new LightRaysEffect(container, {
+                        raysOrigin: 'bottom-center',
+                        raysColor: '#ffffff',
+                        raysSpeed: 1.0,          // Increased from 0.8
+                        lightSpread: 1.5,        // Increased from 1.2 for wider beams
+                        rayLength: 2.5,          // Increased from 2.0 for longer rays
+                        pulsating: true,
+                        fadeDistance: 1.2,       // Increased from 1.0 for better visibility
+                        saturation: 1.0,
+                        followMouse: false,
+                        mouseInfluence: 0.0,
+                        noiseAmount: 0.0,
+                        distortion: 0.0
+                    });
+                }, 100);
+            } else {
+                console.warn('[LightRays] Container not found');
+            }
+        })();
+    </script>
+
+    <!-- 3D Cinematic Parallax Effect -->
+    <script>
+        (function () {
+            'use strict';
+
+            const heroSection = document.getElementById('hero-section');
+            if (!heroSection) return;
+
+            const parallaxLayers = heroSection.querySelectorAll('.parallax-layer');
+
+            let mouseX = 0, mouseY = 0;
+            let currentX = 0, currentY = 0;
+            const ease = 0.1; // Smoothing factor
+
+            // Track mouse movement
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = heroSection.getBoundingClientRect();
+                // Normalize to -1 to 1 range
+                mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+                mouseY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+            });
+
+            // Reset on mouse leave
+            heroSection.addEventListener('mouseleave', () => {
+                mouseX = 0;
+                mouseY = 0;
+            });
+
+            // Animation loop with easing
+            function animate() {
+                // Smooth interpolation
+                currentX += (mouseX - currentX) * ease;
+                currentY += (mouseY - currentY) * ease;
+
+                // Apply transforms to each layer
+                parallaxLayers.forEach(layer => {
+                    const depth = parseFloat(layer.getAttribute('data-depth')) || 0.2;
+                    const moveX = currentX * depth * 60; // Increased from 30px to 60px
+                    const moveY = currentY * depth * 60;
+                    const rotateY = currentX * depth * 12; // Increased from 5deg to 12deg
+                    const rotateX = -currentY * depth * 12;
+
+                    layer.style.transform = `
+                        translateX(${moveX}px) 
+                        translateY(${moveY}px) 
+                        rotateX(${rotateX}deg) 
+                        rotateY(${rotateY}deg)
+                    `;
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            // Start animation loop
+            animate();
+
+            console.log('[3D Parallax] Initialized with', parallaxLayers.length, 'layers');
+        })();
+    </script>
+</body>
+
+</html>
